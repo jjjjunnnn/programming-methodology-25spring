@@ -3,16 +3,16 @@
 
 void TodoList::init() {
     size = 0;
-    for(int i = 0; i < MAX_TASKS; ++i) { 
+    for(int i = 0; i < MAX_TASKS; i++) { 
     tasks[i] = nullptr;
  }
     // TODO: set size to 0 and all task pointers to nullptr
 }
 
 void TodoList::destroy() {
-    for(int i = 0; i < size; ++i) { // size 만큼만 반복
+    for(int i = 0; i < size; i++) { 
         delete[] tasks[i];
-        tasks[i] = nullptr; // 원본 포인터를 nullptr로 설정
+        tasks[i] = nullptr; 
     }
          size = 0;
     // TODO: delete all tasks and reset pointers
@@ -44,7 +44,7 @@ void TodoList::add_task(const char* task) {
         throw std::overflow_error("full.");
     }
     if (task != nullptr) {
-        size_t len = string_length(task);
+        int len = string_length(task);
         tasks[size] = new char[len + 1];
         string_copy(tasks[size], task);
         size++;
@@ -55,7 +55,7 @@ void TodoList::add_task(const char* task) {
 void TodoList::remove_task(int index) {
     // TODO: check bounds, delete task, shift left
     if (index < 0 || index >= size) {
-        throw std::out_of_range("invalid task index.");
+        throw std::out_of_range("invalid index.");
     }
 
     delete[] tasks[index];
